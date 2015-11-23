@@ -48,3 +48,4 @@ end
 
 
 gem 'annotate'
+gem 'dotenv-rails'
