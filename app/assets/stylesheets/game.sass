@@ -1,0 +1,60 @@
+table.board
+  margin: 10px
+  tbody tr td
+    padding: 3px
+    height: 32px
+    width: 32px
+    border: 1px solid #D0D0D0
+    img
+      width: 32px
+      height: 32px
+      position: absolute
+      left: 0
+      top: 0
+      cursor: pointer
+      &:hover
+        transform: scale(1.2)
+      &.l, &.L
+        transform: rotate(-90deg)
+        &:hover
+          transform: rotate(-90deg) scale(1.2)
+      &.r, &.R
+        transform: rotate(90deg)
+        &:hover
+          transform: rotate(90deg) scale(1.2)
+      &.d, &.D
+        transform: rotate(180deg)
+        &:hover
+          transform: rotate(180deg) scale(1.2)
+  
+    .cursor-container
+      position: relative
+      width: 32px
+      height: 32px
+      line-height: 32px
+      text-align: center
+      a
+        position: absolute
+        opacity: 0.3
+        &.squid
+          position: static
+          opacity: 1
+        &:hover
+          opacity: 1
+          color: red
+        &.left
+          left: 0
+        &.right
+          right: 0
+        &.up
+          top: -4px
+          width: 32px
+          height: 10px
+          line-height: 10px
+          left: 0
+        &.down
+          height: 10px
+          line-height: 10px
+          bottom: 1px
+          width: 32px
+          left: 0

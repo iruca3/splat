@@ -1,0 +1,47 @@
+- game = Game.last
+- if game.nil? || game.board.blank?
+  - game = Game.create(board: ' ' * 9 * 9, turn: 'b', turn_number: 1)
+
+.info
+  = image_tag "#{game.turn}.png", width: 32, height: 32
+  | のターンです。(現在#{game.turn_number}ターン目)
+  br
+  = image_tag 'b.png', width: 32, height: 32
+  = "は#{game.black_cell_count}"
+  |  
+  = image_tag 'w.png', width: 32, height: 32
+  = "は#{game.white_cell_count}"
+  br
+  = link_to '新規ゲームを始める', new_game_path, remote: true
+
+table.board
+  tbody
+    - 9.times do |y|
+      tr
+        - 9.times do |x|
+          - cell = game.board[y * 9 + x]
+          - if cell == ' '
+            td
+              .cursor-container
+                = link_to put_path(position: y * 9 + x, direction: :left), class: 'left', method: :post, remote: true do
+                  = fa_icon 'caret-left'
+                = link_to put_path(position: y * 9 + x, direction: :right), class: 'right', method: :post, remote: true do
+                  = fa_icon 'caret-right'
+                = link_to put_path(position: y * 9 + x, direction: :up), class: 'up', method: :post, remote: true do
+                  = fa_icon 'caret-up'
+                = link_to put_path(position: y * 9 + x, direction: :down), class: 'down', method: :post, remote: true do
+                  = fa_icon 'caret-down'
+          - else
+            td
+              .cursor-container
+                = link_to splat_path(position: y * 9 + x), class: 'squid', method: :post, remote: true do
+                  = image_tag "#{cell.downcase == cell ? 'b' : 'w'}.png", class: cell, width: 32, height: 32
+                = link_to rotate_path(position: y * 9 + x, direction: :left), class: 'left', method: :put, remote: true do
+                  = fa_icon 'caret-left'
+                = link_to rotate_path(position: y * 9 + x, direction: :right), class: 'right', method: :put, remote: true do
+                  = fa_icon 'caret-right'
+                = link_to rotate_path(position: y * 9 + x, direction: :up), class: 'up', method: :put, remote: true do
+                  = fa_icon 'caret-up'
+                = link_to rotate_path(position: y * 9 + x, direction: :down), class: 'down', method: :put, remote: true do
+                  = fa_icon 'caret-down'
+
