@@ -12,7 +12,7 @@
   = image_tag 'w.png', width: 32, height: 32
   = "は#{game.white_cell_count}"
   br
-  = link_to '新規ゲームを始める', new_game_path, remote: true
+  = link_to '新規ゲームを始める', new_game_path, method: :post, remote: true
 
 table.board
   tbody
